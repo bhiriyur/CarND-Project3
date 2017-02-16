@@ -29,7 +29,8 @@ def read_data(N_VAL=32):
     n = 11
     bins = np.linspace(-0.6,0.6,n)
     #nsample = [17,70,210,525,832,832,525,210,70,17]
-    nsample = [17,84,50,50,50,50,50,50,70,19]
+    #nsample = [17,84,50,50,50,50,50,50,70,19]
+    nsample = [17, 70, 210, 525, 832, 832, 525, 210, 70, 17]
     B = []
     B.append(A[A['steering']<=-0.6])
     B.append(A[A['steering']>  0.6])    
