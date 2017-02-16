@@ -29,7 +29,7 @@ def read_data(N_VAL=32):
     n = 11
     bins = np.linspace(-0.6,0.6,n)
     #nsample = [17,70,210,525,832,832,525,210,70,17]
-    nsample = [17,84,210,100,100,100,100,243,70,19]
+    nsample = [17,84,50,50,50,50,50,50,70,19]
     B = []
     B.append(A[A['steering']<=-0.6])
     B.append(A[A['steering']>  0.6])    
@@ -37,7 +37,6 @@ def read_data(N_VAL=32):
         start, end = bins[i], bins[i+1]
         Bi = A[(A['steering']>start) & (A['steering']<=end)]
         B.append(Bi.sample(nsample[i]))
-                
     B = pd.concat(B)
 
     B = B.sample(frac=1).reset_index(drop=True)
@@ -109,6 +108,7 @@ def image_crop_reshape(img):
 def data_generator(A,BATCH_SIZE):
     """ An image data generator"""    
     i = 0
+    flip = True
     while True:
         x, y = [], []
         count = 0
@@ -116,7 +116,7 @@ def data_generator(A,BATCH_SIZE):
 
             # Pick center (prob = 3/5), left (1/5) or right (1/5) image
             mode = np.random.choice([1, 1, 1, 2, 3], 1)[0]
-            flip = np.random.random()<0.5
+            #flip = np.random.random()<0.5
 
             # Random shift in width and height
             wshift,hshift = 0.2*np.random.random(2)-0.1
@@ -131,6 +131,7 @@ def data_generator(A,BATCH_SIZE):
             i += 1
             if i == len(A):
                 A = A.sample(frac=1).reset_index(drop=True)
+                flip = False
                 i = 0
 
         yield np.array(x), np.array(y)

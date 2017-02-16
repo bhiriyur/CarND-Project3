@@ -40,7 +40,7 @@ def telemetry(sid, data):
         if abs(steering_angle)<0.2:
             throttle = 0.1
         else:
-            throttle = 0.1*(1-abs(steering_angle)/0.5)
+            throttle = 0.1 #*(1-abs(steering_angle)/0.5)
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
 
