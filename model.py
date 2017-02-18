@@ -228,7 +228,7 @@ def train(FILE='model.h5',load_file=None):
     print("Data mode = {}".format(DATA_MODE))
 
     # Add checkpoint and early-stopping
-    filepath='w.{epoch:02d}-{val_loss:0.2f}.h5'
+    filepath='w.{epoch:02d}-{val_loss:0.4f}.h5'
     checkpointer = ModelCheckpoint(filepath,monitor='val_loss',verbose=1,save_best_only=True)
     early_stopper = EarlyStopping(monitor='val_loss',min_delta=0.001, patience=3, verbose=1)
 
